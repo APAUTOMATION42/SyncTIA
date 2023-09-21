@@ -1,0 +1,124 @@
+﻿FUNCTION_BLOCK "Simulation_Data"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR 
+      Old_Clock : Bool;
+      i : Int;
+   END_VAR
+
+
+BEGIN
+	IF "Clock_1Hz" AND NOT #Old_Clock THEN
+	    "DB_CLOUD".P1S1O2 := "DB_CLOUD".P1S1O2 + 1.0;
+	    "DB_CLOUD".P1S1CO2 := "DB_CLOUD".P1S1CO2 + 1.0;
+	    "DB_CLOUD".P1S1MT := "DB_CLOUD".P1S1MT + 1.0;
+	    "DB_CLOUD".P1S1H := "DB_CLOUD".P1S1H + 1.0;
+	    "DB_CLOUD".P1S1PH := "DB_CLOUD".P1S1PH + 1.0;
+	    
+	    "DB_CLOUD".P1S2O2 := "DB_CLOUD".P1S2O2 + 1.0;
+	    "DB_CLOUD".P1S2CO2 := "DB_CLOUD".P1S2CO2 + 1.0;
+	    "DB_CLOUD".P1S2MT := "DB_CLOUD".P1S2MT + 1.0;
+	    "DB_CLOUD".P1S2H := "DB_CLOUD".P1S2H + 1.0;
+	    "DB_CLOUD".P1S2PH := "DB_CLOUD".P1S2PH + 1.0;
+	    
+	    "DB_CLOUD".P1S3O2 := "DB_CLOUD".P1S3O2 + 1.0;
+	    "DB_CLOUD".P1S3CO2 := "DB_CLOUD".P1S3CO2 + 1.0;
+	    "DB_CLOUD".P1S3MT := "DB_CLOUD".P1S3MT + 1.0;
+	    "DB_CLOUD".P1S3H := "DB_CLOUD".P1S3H + 1.0;
+	    "DB_CLOUD".P1S3PH := "DB_CLOUD".P1S3PH + 1.0;
+	    //=======================================
+	    "DB_CLOUD".P2S1O2 := "DB_CLOUD".P2S1O2 + 1.0;
+	    "DB_CLOUD".P2S1CO2 := "DB_CLOUD".P2S1CO2 + 1.0;
+	    "DB_CLOUD".P2S1MT := "DB_CLOUD".P2S1MT + 1.0;
+	    "DB_CLOUD".P2S1H := "DB_CLOUD".P2S1H + 1.0;
+	    "DB_CLOUD".P2S1PH := "DB_CLOUD".P2S1PH + 1.0;
+	    
+	    "DB_CLOUD".P2S2O2 := "DB_CLOUD".P2S2O2 + 1.0;
+	    "DB_CLOUD".P2S2CO2 := "DB_CLOUD".P2S2CO2 + 1.0;
+	    "DB_CLOUD".P2S2MT := "DB_CLOUD".P2S2MT + 1.0;
+	    "DB_CLOUD".P2S2H := "DB_CLOUD".P2S2H + 1.0;
+	    "DB_CLOUD".P2S2PH := "DB_CLOUD".P2S2PH + 1.0;
+	    
+	    "DB_CLOUD".P2S3O2 := "DB_CLOUD".P2S3O2 + 1.0;
+	    "DB_CLOUD".P2S3CO2 := "DB_CLOUD".P2S3CO2 + 1.0;
+	    "DB_CLOUD".P2S3MT := "DB_CLOUD".P2S3MT + 1.0;
+	    "DB_CLOUD".P2S3H := "DB_CLOUD".P2S3H + 1.0;
+	    "DB_CLOUD".P2S3PH := "DB_CLOUD".P2S3PH + 1.0;
+	    //=======================================
+	    "DB_CLOUD".P3S1O2 := "DB_CLOUD".P3S1O2 + 1.0;
+	    "DB_CLOUD".P3S1CO2 := "DB_CLOUD".P3S1CO2 + 1.0;
+	    "DB_CLOUD".P3S1MT := "DB_CLOUD".P3S1MT + 1.0;
+	    "DB_CLOUD".P3S1H := "DB_CLOUD".P3S1H + 1.0;
+	    "DB_CLOUD".P3S1PH := "DB_CLOUD".P3S1PH + 1.0;
+	    
+	    "DB_CLOUD".P3S2O2 := "DB_CLOUD".P3S2O2 + 1.0;
+	    "DB_CLOUD".P3S2CO2 := "DB_CLOUD".P3S2CO2 + 1.0;
+	    "DB_CLOUD".P3S2MT := "DB_CLOUD".P3S2MT + 1.0;
+	    "DB_CLOUD".P3S2H := "DB_CLOUD".P3S2H + 1.0;
+	    "DB_CLOUD".P3S2PH := "DB_CLOUD".P3S2PH + 1.0;
+	    
+	    "DB_CLOUD".P3S3O2 := "DB_CLOUD".P3S3O2 + 1.0;
+	    "DB_CLOUD".P3S3CO2 := "DB_CLOUD".P3S3CO2 + 1.0;
+	    "DB_CLOUD".P3S3MT := "DB_CLOUD".P3S3MT + 1.0;
+	    "DB_CLOUD".P3S3H := "DB_CLOUD".P3S3H + 1.0;
+	    "DB_CLOUD".P3S3PH := "DB_CLOUD".P3S3PH + 1.0;
+	    //==========================
+	    "DB_CLOUD".P4S1O2 := "DB_CLOUD".P4S1O2 + 1.0;
+	    "DB_CLOUD".P4S1CO2 := "DB_CLOUD".P4S1CO2 + 1.0;
+	    "DB_CLOUD".P4S1MT := "DB_CLOUD".P4S1MT + 1.0;
+	    "DB_CLOUD".P4S1H := "DB_CLOUD".P4S1H + 1.0;
+	    "DB_CLOUD".P4S1PH := "DB_CLOUD".P4S1PH + 1.0;
+	    
+	    "DB_CLOUD".P4S2O2 := "DB_CLOUD".P4S2O2 + 1.0;
+	    "DB_CLOUD".P4S2CO2 := "DB_CLOUD".P4S2CO2 + 1.0;
+	    "DB_CLOUD".P4S2MT := "DB_CLOUD".P4S2MT + 1.0;
+	    "DB_CLOUD".P4S2H := "DB_CLOUD".P4S2H + 1.0;
+	    "DB_CLOUD".P4S2PH := "DB_CLOUD".P4S2PH + 1.0;
+	    
+	    "DB_CLOUD".P4S3O2 := "DB_CLOUD".P4S3O2 + 1.0;
+	    "DB_CLOUD".P4S3CO2 := "DB_CLOUD".P4S3CO2 + 1.0;
+	    "DB_CLOUD".P4S3MT := "DB_CLOUD".P4S3MT + 1.0;
+	    "DB_CLOUD".P4S3H := "DB_CLOUD".P4S3H + 1.0;
+	    "DB_CLOUD".P4S3PH := "DB_CLOUD".P4S3PH + 1.0;
+	    //==================================
+	    "DB_CLOUD".P5S1O2 := "DB_CLOUD".P5S1O2 + 1.0;
+	    "DB_CLOUD".P5S1CO2 := "DB_CLOUD".P5S1CO2 + 1.0;
+	    "DB_CLOUD".P5S1MT := "DB_CLOUD".P5S1MT + 1.0;
+	    "DB_CLOUD".P5S1H := "DB_CLOUD".P5S1H + 1.0;
+	    "DB_CLOUD".P5S1PH := "DB_CLOUD".P5S1PH + 1.0;
+	    
+	    "DB_CLOUD".P5S2O2 := "DB_CLOUD".P5S2O2 + 1.0;
+	    "DB_CLOUD".P5S2CO2 := "DB_CLOUD".P5S2CO2 + 1.0;
+	    "DB_CLOUD".P5S2MT := "DB_CLOUD".P5S2MT + 1.0;
+	    "DB_CLOUD".P5S2H := "DB_CLOUD".P5S2H + 1.0;
+	    "DB_CLOUD".P5S2PH := "DB_CLOUD".P5S2PH + 1.0;
+	    
+	    "DB_CLOUD".P5S3O2 := "DB_CLOUD".P5S3O2 + 1.0;
+	    "DB_CLOUD".P5S3CO2 := "DB_CLOUD".P5S3CO2 + 1.0;
+	    "DB_CLOUD".P5S3MT := "DB_CLOUD".P5S3MT + 1.0;
+	    "DB_CLOUD".P5S3H := "DB_CLOUD".P5S3H + 1.0;
+	    "DB_CLOUD".P5S3PH := "DB_CLOUD".P5S3PH + 1.0;
+	    //==============================
+	    "DB_CLOUD".P6S1O2 := "DB_CLOUD".P6S1O2 + 1.0;
+	    "DB_CLOUD".P6S1CO2 := "DB_CLOUD".P6S1CO2 + 1.0;
+	    "DB_CLOUD".P6S1MT := "DB_CLOUD".P6S1MT + 1.0;
+	    "DB_CLOUD".P6S1H := "DB_CLOUD".P6S1H + 1.0;
+	    "DB_CLOUD".P6S1PH := "DB_CLOUD".P6S1PH + 1.0;
+	    
+	    "DB_CLOUD".P6S2O2 := "DB_CLOUD".P6S2O2 + 1.0;
+	    "DB_CLOUD".P6S2CO2 := "DB_CLOUD".P6S2CO2 + 1.0;
+	    "DB_CLOUD".P6S2MT := "DB_CLOUD".P6S2MT + 1.0;
+	    "DB_CLOUD".P6S2H := "DB_CLOUD".P6S2H + 1.0;
+	    "DB_CLOUD".P6S2PH := "DB_CLOUD".P6S2PH + 1.0;
+	    
+	    "DB_CLOUD".P6S3O2 := "DB_CLOUD".P6S3O2 + 1.0;
+	    "DB_CLOUD".P6S3CO2 := "DB_CLOUD".P6S3CO2 + 1.0;
+	    "DB_CLOUD".P6S3MT := "DB_CLOUD".P6S3MT + 1.0;
+	    "DB_CLOUD".P6S3H := "DB_CLOUD".P6S3H + 1.0;
+	    "DB_CLOUD".P6S3PH := "DB_CLOUD".P6S3PH + 1.0;
+	   
+	  
+	END_IF;
+	#Old_Clock := "Clock_1Hz";
+END_FUNCTION_BLOCK
+

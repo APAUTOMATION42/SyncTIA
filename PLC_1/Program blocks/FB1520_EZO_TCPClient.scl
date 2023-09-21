@@ -1,0 +1,98 @@
+﻿FUNCTION_BLOCK "FB1520_EZO_TCPClient"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+   VAR_INPUT 
+      Enable : Bool;
+      EN_R : Bool;
+      ID : CONN_OUC := 16#0001;
+      PORT : UInt := 4196;
+      IP_1 : Byte := 192;
+      IP_2 : Byte := 168;
+      IP_3 : Byte := 1;
+      IP_4 : Byte := 200;
+   END_VAR
+
+   VAR_OUTPUT 
+      DONE : Bool;
+      BUSY : Bool;
+      ERROR : Bool;
+      STATUS : Word;
+      Value : Real;
+   END_VAR
+
+   VAR_IN_OUT 
+      COM_RST : Bool;
+   END_VAR
+
+   VAR 
+      CONNECT {InstructionName := 'TCON_IP_v4'; LibVersion := '1.0'; S7_SetPoint := 'False'} : TCON_IP_v4 := (64, 16#0001, (), TRUE, ([()]), (), ());
+      RCV_DATA : Array[0..8] of Char;
+      Done_Old : Bool;
+      Pos_R : Int;
+      TRCV_C1 {InstructionName := 'TRCV_C'; LibVersion := '3.2'; S7_SetPoint := 'False'} : TRCV_C;
+      QT1 { S7_SetPoint := 'True'} : Bool;
+      QT2 : Bool;
+      T1 {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+      T2 {InstructionName := 'TON_TIME'; LibVersion := '1.0'} : TON_TIME;
+   END_VAR
+
+   VAR_TEMP 
+      ResetData : Array[0..8] of Char;
+      RCV_Temp : Array[0..8] of Char;
+      String_Temp_1 : String[9];
+      String_Temp_2 : String[9];
+   END_VAR
+
+
+BEGIN
+	
+	REGION Initial
+	    #CONNECT.ID := #ID;
+	    #CONNECT.RemotePort := #PORT;
+	    #CONNECT.RemoteAddress.ADDR[1] := #IP_1;
+	    #CONNECT.RemoteAddress.ADDR[2] := #IP_2;
+	    #CONNECT.RemoteAddress.ADDR[3] := #IP_3;
+	    #CONNECT.RemoteAddress.ADDR[4] := #IP_4;
+	    #TRCV_C1(EN_R := #EN_R,
+	            CONT := #Enable,
+	            LEN := 9,
+	            ADHOC := TRUE,
+	            DONE => #DONE,
+	            BUSY => #BUSY,
+	            ERROR => #ERROR,
+	            STATUS => #STATUS,
+	            CONNECT := #CONNECT,
+	            DATA := #RCV_Temp,
+	            COM_RST := #COM_RST);
+	    
+	END_REGION
+	REGION Split Data
+	    IF #TRCV_C1.DONE AND NOT #Done_Old THEN
+	        #RCV_DATA := #RCV_Temp;
+	        #RCV_Temp := #ResetData;
+	    END_IF;
+	    Chars_TO_Strg(Chars := #RCV_DATA,
+	                  pChars := 0,
+	                  Cnt := 0,
+	                  Strg => #String_Temp_1);
+	    #Pos_R := FIND(IN1 := #String_Temp_1, IN2 := '$R');
+	    #String_Temp_2 := CONCAT_STRING(IN1 := '$R', IN2 := #String_Temp_1);
+	    #Value := STRING_TO_REAL(MID_STRING(IN := #String_Temp_2, L := #Pos_R - 1, P := 2));
+	    
+	END_REGION
+	REGION Restart Comunication
+	    #T1(IN:= NOT #DONE AND NOT #QT2,
+	       PT:=T#4s,
+	       Q=>#QT1);
+	   #T2(IN := #QT1,
+	       PT := T#1s,
+	       Q => #QT2);
+	   #COM_RST := #QT1;
+	   
+	END_REGION
+	
+	#Done_Old := #TRCV_C1.DONE;
+	
+	
+END_FUNCTION_BLOCK
+
